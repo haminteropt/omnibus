@@ -13,6 +13,7 @@ namespace OmniRigBus
         public void Configuration(IAppBuilder app)
         {
 
+            OmniRigOle rigOle = new OmniRigOle();
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
