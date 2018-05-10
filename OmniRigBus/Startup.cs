@@ -10,10 +10,11 @@ namespace OmniRigBus
 {
     class Startup
     {
+        private ORig rig;
         public void Configuration(IAppBuilder app)
         {
 
-            OmniRigOle rigOle = new OmniRigOle();
+            rig = ORig.Instance;
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
             config.Routes.MapHttpRoute(
