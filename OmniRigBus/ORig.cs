@@ -32,17 +32,17 @@ namespace OmniRigBus
             rigState.FreqA = Rig.FreqA;
             rigState.FreqB = Rig.FreqB;
 
-            rigState.Mode = Rig.Mode;
+            rigState.Mode = Rig.Mode.ToString();
             rigState.Pitch = Rig.Pitch;
             rigState.RigType = Rig.RigType;
 
-            rigState.Rit = Rig.Rit;
+            rigState.Rit = Rig.Rit.ToString();
             rigState.RitOffset = Rig.RitOffset;
-            rigState.Split = Rig.Split;
-            rigState.Status = Rig.Status;
-            rigState.Tx = Rig.Tx;
-            rigState.Vfo = Rig.Vfo;
-            rigState.Xit = Rig.Xit;
+            rigState.Split = Rig.Split.ToString();
+            rigState.Status = Rig.Status.ToString();
+            rigState.Tx = Rig.Tx.ToString();
+            rigState.Vfo = Rig.Vfo.ToString();
+            rigState.Xit = Rig.Xit.ToString();
 
             Console.WriteLine( Rig.FreqA.ToString());
             Console.WriteLine(Rig.Mode.ToString());
