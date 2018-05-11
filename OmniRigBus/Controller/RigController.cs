@@ -1,15 +1,25 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace OmniRigBus.Controller
 {
     public class RigController : ApiController
     {
-        // GET api/rig 
-        public IEnumerable<string> Get()
+        private RigState rigState = RigState.Instance;
+        public RigController()
         {
-            return new string[] { "Hello", "World" };
+
         }
+        // GET api/rig 
+        public RigState Get()
+        {
+            return rigState;
+        }
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "Hello", "World" };
+        //}
 
         // GET api/rig/5 
         public string Get(int id)
