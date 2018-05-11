@@ -101,7 +101,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller\DemoController.cs" />
     <Compile Include="Controller\RigController.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
     <Compile Include="OmniRigCOM\RigParamX.cs" />
