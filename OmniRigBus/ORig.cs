@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OmniRig;
+using OmniRigBus.RestRig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,43 +14,51 @@ namespace OmniRigBus
     {
         private static ORig instance = null;
         private OmniRigX OmniRig;
-        private RigX Rig;
-        private RigState rigState = RigState.Instance;
+        private List<RigX> RigX = new List<RigX>();
+
+        private Rigs rigState = Rigs.Instance;
 
         private ORig()
         {
             OmniRig = new OmniRigX();
             OmniRig.ParamsChange += ParamsChangeEvent;
-            Rig = OmniRig.Rig1;
+            RigX.Add(OmniRig.Rig1);
+            RigX.Add(OmniRig.Rig2);
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
         {
-            if (RigNumber != 1) return;
-
-            var rigState = RigState.Instance;
-
-            rigState.Freq = Rig.Freq;
-            rigState.FreqA = Rig.FreqA;
-            rigState.FreqB = Rig.FreqB;
-
-            rigState.Mode = Rig.Mode.ToString();
-            rigState.Pitch = Rig.Pitch;
-            rigState.RigType = Rig.RigType;
-
-            rigState.Rit = Rig.Rit.ToString();
-            rigState.RitOffset = Rig.RitOffset;
-            rigState.Split = Rig.Split.ToString();
-            rigState.Status = Rig.Status.ToString();
-            rigState.Tx = Rig.Tx.ToString();
-            rigState.Vfo = Rig.Vfo.ToString();
-            rigState.Xit = Rig.Xit.ToString();
-
-            Console.WriteLine( Rig.FreqA.ToString());
-            Console.WriteLine(Rig.Mode.ToString());
+            if (RigNumber != 1 && RigNumber != 2) return;
+            Console.WriteLine(String.Format("Param: {0}", Params));
+            RigState rigState = SetRigState(RigNumber);
             var json = JsonConvert.SerializeObject(rigState);
-            Console.Write(json);
+
 
         }
+
+        public RigState SetRigState(int rigNum)
+        {
+
+            var rigs = Rigs.Instance;
+            var rigList = rigs.RigList;
+
+            rigList[rigNum].Freq = RigX[rigNum].Freq;
+            rigList[rigNum].FreqA = RigX[rigNum].FreqA;
+            rigList[rigNum].FreqB = RigX[rigNum].FreqB;
+ 
+            rigList[rigNum].Mode = RigX[rigNum].Mode.ToString();
+            rigList[rigNum].Pitch = RigX[rigNum].Pitch;
+            rigList[rigNum].RigType = RigX[rigNum].RigType;
+
+            rigList[rigNum].Rit = RigX[rigNum].Rit.ToString();
+            rigList[rigNum].RitOffset = RigX[rigNum].RitOffset;
+            rigList[rigNum].Split = RigX[rigNum].Split.ToString();
+            rigList[rigNum].Status = RigX[rigNum].Status.ToString();
+            rigList[rigNum].Tx = RigX[rigNum].Tx.ToString();
+            rigList[rigNum].Vfo = RigX[rigNum].Vfo.ToString();
+            rigList[rigNum].Xit = RigX[rigNum].Xit.ToString();
+            return rigList[rigNum];
+        }
+
         public static ORig Instance
         {
             get

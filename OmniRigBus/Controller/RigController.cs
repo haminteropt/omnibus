@@ -1,20 +1,26 @@
 ﻿using Newtonsoft.Json;
+using OmniRigBus.RestRig;
 using System.Collections.Generic;
+using System.Net;
 using System.Web.Http;
 
 namespace OmniRigBus.Controller
 {
-    public class RigController : ApiController
+    public class OmniRigController : ApiController
     {
-        private RigState rigState = RigState.Instance;
-        public RigController()
+        private Rigs rigs = Rigs.Instance;
+        private ORig oRig = ORig.Instance;
+
+        public OmniRigController()
         {
 
         }
         // GET api/rig 
-        public RigState Get()
+        public Rigs Get()
         {
-            return rigState;
+            oRig.SetRigState(0);
+            oRig.SetRigState(1);
+            return rigs;
         }
         //public IEnumerable<string> Get()
         //{
@@ -22,9 +28,15 @@ namespace OmniRigBus.Controller
         //}
 
         // GET api/rig/5 
-        public string Get(int id)
+        public RigState Get(int id)
         {
-            return "Hello, World!";
+
+            
+            if (id != 1 && id != 2)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            id--;
+            oRig.SetRigState(id);
+            return rigs.RigList[id];
         }
 
         // POST api/demo 

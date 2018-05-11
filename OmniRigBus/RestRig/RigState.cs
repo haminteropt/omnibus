@@ -9,18 +9,6 @@ namespace OmniRigBus
 {
     public class RigState
     {
-        public static RigState Instance
-        {
-            get {
-                if (instance == null)
-                {
-                    instance = new RigState();
-                }
-                return instance;
-            }
-        }
-        private static RigState instance = null;
-
         public int Freq { get; set; }
         public int FreqA { get; set; }
         public int FreqB { get; set; }

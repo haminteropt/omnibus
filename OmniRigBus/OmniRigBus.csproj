@@ -110,6 +110,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RestRig\RigInfo.cs" />
+    <Compile Include="RestRig\Rigs.cs" />
     <Compile Include="RestRig\RigState.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
