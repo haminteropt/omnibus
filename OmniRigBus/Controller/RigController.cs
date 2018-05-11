@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OmniRigBus.RestRig;
+using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
@@ -20,8 +21,8 @@ namespace OmniRigBus.Controller
 
         public Rigs Get()
         {
-            oRig.SetRigState(0);
-            oRig.SetRigState(1);
+            oRig.GetRigState(0);
+            oRig.GetRigState(1);
             return rigs;
         }
         //public IEnumerable<string> Get()
@@ -37,7 +38,7 @@ namespace OmniRigBus.Controller
             if (id != 1 && id != 2)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             id--;
-            oRig.SetRigState(id);
+            oRig.GetRigState(id);
             return rigs.RigList[id];
         }
 
@@ -46,14 +47,10 @@ namespace OmniRigBus.Controller
         {
         }
 
-        // PUT api/demo/5 
-        public void Put(int id, [FromBody]string value)
+        // PUT api/OmniRig/5 
+        public void Put(int id, [FromBody]RigState value)
         {
-        }
-
-        // DELETE api/demo/5 
-        public void Delete(int id)
-        {
+            oRig.SetRigState(id - 1, value);
         }
 
     }

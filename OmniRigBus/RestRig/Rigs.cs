@@ -14,9 +14,15 @@ namespace OmniRigBus.RestRig
         private Rigs()
         {
             RigList = new List<RigState>();
+
+        }
+
+        public void PopulateRigs()
+        {
             RigList.Add(new RigState());
             RigList.Add(new RigState());
         }
+
         public static Rigs Instance
         {
 

@@ -29,13 +29,13 @@ namespace OmniRigBus
         {
             if (RigNumber != 1 && RigNumber != 2) return;
             Console.WriteLine(String.Format("Param: {0}", Params));
-            RigState rigState = SetRigState(RigNumber);
+            RigState rigState = GetRigState(RigNumber);
             var json = JsonConvert.SerializeObject(rigState);
 
 
         }
 
-        public RigState SetRigState(int rigNum)
+        public RigState GetRigState(int rigNum)
         {
 
             var rigs = Rigs.Instance;
@@ -44,8 +44,9 @@ namespace OmniRigBus
             rigList[rigNum].Freq = RigX[rigNum].Freq;
             rigList[rigNum].FreqA = RigX[rigNum].FreqA;
             rigList[rigNum].FreqB = RigX[rigNum].FreqB;
- 
-            rigList[rigNum].Mode = RigX[rigNum].Mode.ToString();
+
+            var foo = OmniMapping.ParamStr[RigX[rigNum].Mode];
+            rigList[rigNum].Mode = (int) OmniMapping.ParamStr[RigX[rigNum].Mode];
             rigList[rigNum].Pitch = RigX[rigNum].Pitch;
             rigList[rigNum].RigType = RigX[rigNum].RigType;
 
@@ -57,6 +58,27 @@ namespace OmniRigBus
             rigList[rigNum].Vfo = RigX[rigNum].Vfo.ToString();
             rigList[rigNum].Xit = RigX[rigNum].Xit.ToString();
             return rigList[rigNum];
+        }
+        public void SetRigState(int rigNum, RigState state)
+        {
+
+            var rigs = Rigs.Instance;
+
+            RigX[rigNum].Freq = state.Freq;
+            RigX[rigNum].FreqA = state.FreqA;
+            RigX[rigNum].FreqB = (int)state.FreqB;
+
+            RigX[rigNum].Mode = (RigParamX) OmniMapping.StrParam[state.Mode];
+            RigX[rigNum].Pitch = state.Pitch;
+
+            RigX[rigNum].Rit = (RigParamX) OmniMapping.StrParam[state.Rit];
+            RigX[rigNum].RitOffset = state.RitOffset;
+            
+            var foo = OmniMapping.StrParam[state.Split];
+            RigX[rigNum].Split = (OmniRig.RigParamX) OmniMapping.StrParam[state.Split];
+
+            RigX[rigNum].Vfo = (RigParamX)OmniMapping.StrParam[state.Vfo];
+            RigX[rigNum].Xit = (RigParamX)OmniMapping.StrParam[state.Xit];
         }
 
         public static ORig Instance
