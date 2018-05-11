@@ -6,6 +6,7 @@ using System.Web.Http;
 
 namespace OmniRigBus.Controller
 {
+    [RoutePrefix("v1/OmniRig")]
     public class OmniRigController : ApiController
     {
         private Rigs rigs = Rigs.Instance;
@@ -16,6 +17,7 @@ namespace OmniRigBus.Controller
 
         }
         // GET api/rig 
+
         public Rigs Get()
         {
             oRig.SetRigState(0);

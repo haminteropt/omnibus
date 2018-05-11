@@ -1,6 +1,9 @@
 # omnibus
 ReST server to talk to OmniRig
 
+Swagger API docs
+http://localhost:7300/swagger/
+
 Setting up self-Hosting
 https://codeopinion.com/self-host-asp-net-web-api/
 
