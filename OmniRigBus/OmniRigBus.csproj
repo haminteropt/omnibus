@@ -74,11 +74,14 @@
     <Compile Include="Controller\DemoController.cs" />
     <Compile Include="Controller\RigController.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
+    <Compile Include="OmniRigCOM\RigParamX.cs" />
+    <Compile Include="OmniRigCOM\RigStatusX.cs" />
     <Compile Include="OmniRigOle.cs" />
     <Compile Include="ORig.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RigState.cs" />
+    <Compile Include="RestRig\RigInfo.cs" />
+    <Compile Include="RestRig\RigState.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
