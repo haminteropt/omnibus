@@ -59,14 +59,14 @@ namespace OmniRigBus
             rigList[rigNum].RigType = RigX[rigNum].RigType;
             rigList[rigNum].RitOffset = RigX[rigNum].RitOffset;
 
-            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Rit);
-            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Split);
+            rigList[rigNum].Rit = OmniMapping.ParamToString(RigX[rigNum].Rit);
+            rigList[rigNum].Split = OmniMapping.ParamToString(RigX[rigNum].Split);
 
             // todo fix
-            rigList[rigNum].Mode = OmniMapping.ParamToString((OmniRig.RigParamX)RigX[rigNum].Status);
-            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Tx);
-            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Vfo);
-            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Xit);
+            rigList[rigNum].Status = OmniMapping.ParamToString((OmniRig.RigParamX)RigX[rigNum].Status);
+            rigList[rigNum].Tx = OmniMapping.ParamToString(RigX[rigNum].Tx);
+            rigList[rigNum].Vfo = OmniMapping.ParamToString(RigX[rigNum].Vfo);
+            rigList[rigNum].Xit = OmniMapping.ParamToString(RigX[rigNum].Xit);
             return rigList[rigNum];
         }
         public void SetRigState(int rigNum, RigState state)
