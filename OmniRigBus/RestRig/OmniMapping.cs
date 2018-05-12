@@ -31,10 +31,10 @@ namespace OmniRigBus.RestRig
             return rc;
         }
 
-        static public string StringToParam(OmniRigBus.OmniRigCOM.RigParamX param)
+        static public OmniRigBus.OmniRigCOM.RigParamX StringToParam(string param)
         {
             OmniMapping.init();
-            var rc = OmniMapping.ParamToStr[param];
+            var rc = (OmniRigBus.OmniRigCOM.RigParamX) OmniMapping.StrToParam[param];
             return rc;
         }
         static private void buildStrParam()
