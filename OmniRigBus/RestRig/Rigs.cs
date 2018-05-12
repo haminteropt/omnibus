@@ -19,6 +19,7 @@ namespace OmniRigBus.RestRig
 
         public void PopulateRigs()
         {
+            if (RigList.Count != 0) return;
             RigList.Add(new RigState());
             RigList.Add(new RigState());
         }

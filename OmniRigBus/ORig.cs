@@ -39,24 +39,34 @@ namespace OmniRigBus
         {
 
             var rigs = Rigs.Instance;
+            rigs.PopulateRigs();
             var rigList = rigs.RigList;
+
 
             rigList[rigNum].Freq = RigX[rigNum].Freq;
             rigList[rigNum].FreqA = RigX[rigNum].FreqA;
             rigList[rigNum].FreqB = RigX[rigNum].FreqB;
 
-            var foo = OmniMapping.ParamStr[RigX[rigNum].Mode];
-            rigList[rigNum].Mode = (int) OmniMapping.ParamStr[RigX[rigNum].Mode];
+
             rigList[rigNum].Pitch = RigX[rigNum].Pitch;
             rigList[rigNum].RigType = RigX[rigNum].RigType;
 
-            rigList[rigNum].Rit = RigX[rigNum].Rit.ToString();
+
             rigList[rigNum].RitOffset = RigX[rigNum].RitOffset;
-            rigList[rigNum].Split = RigX[rigNum].Split.ToString();
-            rigList[rigNum].Status = RigX[rigNum].Status.ToString();
-            rigList[rigNum].Tx = RigX[rigNum].Tx.ToString();
-            rigList[rigNum].Vfo = RigX[rigNum].Vfo.ToString();
-            rigList[rigNum].Xit = RigX[rigNum].Xit.ToString();
+            //
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Mode);
+            rigList[rigNum].Pitch = RigX[rigNum].Pitch;
+            rigList[rigNum].RigType = RigX[rigNum].RigType;
+            rigList[rigNum].RitOffset = RigX[rigNum].RitOffset;
+
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Rit);
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Split);
+
+            // todo fix
+            rigList[rigNum].Mode = OmniMapping.ParamToString((OmniRig.RigParamX)RigX[rigNum].Status);
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Tx);
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Vfo);
+            rigList[rigNum].Mode = OmniMapping.ParamToString(RigX[rigNum].Xit);
             return rigList[rigNum];
         }
         public void SetRigState(int rigNum, RigState state)
@@ -68,17 +78,16 @@ namespace OmniRigBus
             RigX[rigNum].FreqA = state.FreqA;
             RigX[rigNum].FreqB = (int)state.FreqB;
 
-            RigX[rigNum].Mode = (RigParamX) OmniMapping.StrParam[state.Mode];
+            RigX[rigNum].Mode = (RigParamX) OmniMapping.StrToParam[state.Mode];
             RigX[rigNum].Pitch = state.Pitch;
 
-            RigX[rigNum].Rit = (RigParamX) OmniMapping.StrParam[state.Rit];
+            RigX[rigNum].Rit = (RigParamX) OmniMapping.StrToParam[state.Rit];
             RigX[rigNum].RitOffset = state.RitOffset;
             
-            var foo = OmniMapping.StrParam[state.Split];
-            RigX[rigNum].Split = (OmniRig.RigParamX) OmniMapping.StrParam[state.Split];
+            RigX[rigNum].Split = (OmniRig.RigParamX) OmniMapping.StrToParam[state.Split];
 
-            RigX[rigNum].Vfo = (RigParamX)OmniMapping.StrParam[state.Vfo];
-            RigX[rigNum].Xit = (RigParamX)OmniMapping.StrParam[state.Xit];
+            RigX[rigNum].Vfo = (RigParamX)OmniMapping.StrToParam[state.Vfo];
+            RigX[rigNum].Xit = (RigParamX)OmniMapping.StrToParam[state.Xit];
         }
 
         public static ORig Instance
