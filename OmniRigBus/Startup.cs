@@ -1,4 +1,5 @@
-﻿using Owin;
+﻿using Microsoft.Owin.Cors;
+using Owin;
 using Swashbuckle.Application;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace OmniRigBus
         private ORig rig;
         public void Configuration(IAppBuilder app)
         {
-
+            app.UseCors(CorsOptions.AllowAll);
             rig = ORig.Instance;
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
