@@ -108,6 +108,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\RigController.cs" />
+    <Compile Include="GetOpt\Argument.cs" />
+    <Compile Include="GetOpt\BranchPattern.cs" />
+    <Compile Include="GetOpt\Command.cs" />
+    <Compile Include="GetOpt\Docopt.cs" />
+    <Compile Include="GetOpt\DocoptBaseException.cs" />
+    <Compile Include="GetOpt\DocoptExitException.cs" />
+    <Compile Include="GetOpt\DocoptInputErrorException.cs" />
+    <Compile Include="GetOpt\DocoptLanguageErrorException.cs" />
+    <Compile Include="GetOpt\Either.cs" />
+    <Compile Include="GetOpt\GenerateCodeHelper.cs" />
+    <Compile Include="GetOpt\LeafPattern.cs" />
+    <Compile Include="GetOpt\MatchResult.cs" />
+    <Compile Include="GetOpt\Node.cs" />
+    <Compile Include="GetOpt\OneOrMore.cs" />
+    <Compile Include="GetOpt\Option.cs" />
+    <Compile Include="GetOpt\Optional.cs" />
+    <Compile Include="GetOpt\OptionsShortcut.cs" />
+    <Compile Include="GetOpt\Pattern.cs" />
+    <Compile Include="GetOpt\Required.cs" />
+    <Compile Include="GetOpt\StringPartition.cs" />
+    <Compile Include="GetOpt\Tokens.cs" />
+    <Compile Include="GetOpt\ValueObject.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
     <Compile Include="OmniRigCOM\RigParamX.cs" />
     <Compile Include="OmniRigCOM\RigStatusX.cs" />
@@ -123,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="GetOpt\DocoptNet.publickey" />
+    <None Include="GetOpt\DocoptNet.snk" />
     <None Include="OmniRigBus_TemporaryKey.pfx" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -138,11 +162,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\DocOptNet\DocOptNet.csproj">
-      <Project>{aad9b711-c07c-4153-82d0-8999c099cb85}</Project>
-      <Name>DocOptNet</Name>
-    </ProjectReference>
+    <Content Include="GetOpt\DocoptNet.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
