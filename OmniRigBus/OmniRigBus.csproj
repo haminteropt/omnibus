@@ -138,5 +138,11 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DocOptNet\DocOptNet.csproj">
+      <Project>{aad9b711-c07c-4153-82d0-8999c099cb85}</Project>
+      <Name>DocOptNet</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
