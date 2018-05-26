@@ -170,6 +170,7 @@ PublishScripts/
 *.nuget.props
 *.nuget.targets
 
+
 # Microsoft Azure Build Output
 csx/
 *.build.csdef
@@ -286,3 +287,4 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+!Interop.OmniRig.dll
