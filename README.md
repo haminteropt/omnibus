@@ -10,3 +10,7 @@ https://codeopinion.com/self-host-asp-net-web-api/
 Run as a service.
 https://github.com/luisperezphd/RunAsService
 
+Building
+
+Must add Interop.OmniRig.dll to reference to build.
+
