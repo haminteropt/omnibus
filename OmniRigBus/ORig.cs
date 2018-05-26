@@ -63,7 +63,7 @@ namespace OmniRigBus
             rigList[rigNum].Split = OmniMapping.ParamToString(RigX[rigNum].Split);
 
             // todo fix
-            rigList[rigNum].Status = OmniMapping.ParamToString((OmniRig.RigParamX)RigX[rigNum].Status);
+            //rigList[rigNum].Status = OmniMapping.ParamToString((OmniRig.RigParamX)RigX[rigNum].Status);
             rigList[rigNum].Tx = OmniMapping.ParamToString(RigX[rigNum].Tx);
             rigList[rigNum].Vfo = OmniMapping.ParamToString(RigX[rigNum].Vfo);
             rigList[rigNum].Xit = OmniMapping.ParamToString(RigX[rigNum].Xit);
