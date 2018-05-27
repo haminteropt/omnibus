@@ -20,10 +20,13 @@ namespace OmniRigBus
 
         private ORig()
         {
-            OmniRig = new OmniRigX();
-            OmniRig.ParamsChange += ParamsChangeEvent;
-            RigX.Add(OmniRig.Rig1);
-            RigX.Add(OmniRig.Rig2);
+
+                OmniRig = new OmniRigX();
+                OmniRig.ParamsChange += ParamsChangeEvent;
+                RigX.Add(OmniRig.Rig1);
+                RigX.Add(OmniRig.Rig2);
+
+            
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
         {
@@ -31,8 +34,6 @@ namespace OmniRigBus
             Console.WriteLine(String.Format("Param: {0}", Params));
             RigState rigState = GetRigState(RigNumber);
             var json = JsonConvert.SerializeObject(rigState);
-
-
         }
 
         public RigState GetRigState(int rigNum)

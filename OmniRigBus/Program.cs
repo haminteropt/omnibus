@@ -13,8 +13,10 @@ namespace OmniRigBus
     {
         static int Main(string[] args)
         {
-            {
+
                 var exitCode = HostFactory.Run(c =>
+                {
+                try
                 {
                     c.Service<OmniRigService>(service =>
                     {
@@ -26,17 +28,25 @@ namespace OmniRigBus
                     c.SetServiceName("OmniRigHamBus");
                     c.SetDisplayName("OmniRig HamBus server");
                     c.SetDescription("Web server for OmniRig and hambus");
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        if (e.InnerException != null)
+                        {
+                            Console.WriteLine(e.InnerException.Message);
+
+                            Console.WriteLine("\n\nCould not open COM object! Exiting");
+
+
+                            return -1;
+                        }
+                    }
                 });
                 return (int)exitCode;
-            }
-            /*
-            using (WebApp.Start<Startup>("http://localhost:7300"))
-            {
-                Console.WriteLine("Web Server is running.");
-                Console.WriteLine("Press any key to quit.");
-                Console.ReadLine();
-            }
-            */
+         
+            return 0;
+
         }
     }
 }
