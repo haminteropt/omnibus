@@ -13,10 +13,8 @@ namespace OmniRigBus
     {
         static int Main(string[] args)
         {
-
+            try {
                 var exitCode = HostFactory.Run(c =>
-                {
-                try
                 {
                     c.Service<OmniRigService>(service =>
                     {
@@ -28,23 +26,22 @@ namespace OmniRigBus
                     c.SetServiceName("OmniRigHamBus");
                     c.SetDisplayName("OmniRig HamBus server");
                     c.SetDescription("Web server for OmniRig and hambus");
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        if (e.InnerException != null)
-                        {
-                            Console.WriteLine(e.InnerException.Message);
-
-                            Console.WriteLine("\n\nCould not open COM object! Exiting");
-
-
-                            return -1;
-                        }
-                    }
                 });
                 return (int)exitCode;
-         
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                if (e.InnerException != null)
+                {
+                    Console.WriteLine(e.InnerException.Message);
+
+                    Console.WriteLine("\n\nCould not open COM object! Exiting");
+
+
+                    return -1;
+                }
+            }
             return 0;
 
         }

@@ -22,17 +22,8 @@ namespace OmniRigBus
             config.EnableSwagger(c => c.SingleApiVersion("v1", "A title for your API")).
             EnableSwaggerUi();
 
-            config.Routes.MapHttpRoute(
-                name: "rigv1",
-                routeTemplate: "api/v1/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
+            config.MapHttpAttributeRoutes();
 
-            config.Routes.MapHttpRoute(
-                name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional }
-            );
 
             app.UseWebApi(config);
         }
