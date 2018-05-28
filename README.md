@@ -36,5 +36,20 @@ omnirigbus --help
 
 Not sure why yet, but --autostart doesn't work for me.  
 
+### Modes
+HamBus     OmniRig
+USB         SSB_U
+LSB         SSB_L
+AM          AM
+FM          FM
+DSB         SSB_U
+CWL         CW_L
+CWU         CW_U
+SAM         SSB_U
+SPEC        SSB_U
+DIGL        DIG_L
+DIGU        DIG_U
+
+
 
 

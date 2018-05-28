@@ -70,6 +70,60 @@ namespace OmniRigBus
             rigList[rigNum].Xit = OmniMapping.ParamToString(RigX[rigNum].Xit);
             return rigList[rigNum];
         }
+
+        internal void setMode(int rigId, string mode)
+        {
+            string omniMode = "undefine";
+            mode = mode.ToUpper();
+            switch(mode)
+            {
+                case "USB":
+                    omniMode = "SSB_U";
+                    break;
+                case "LSB":
+                    omniMode = "SSB_L";
+                    break;
+                case "AM":
+                    omniMode = "AM";
+                    break;
+                case "FM":
+                    omniMode = "FM";
+                    break;
+                case "DSB":
+                    omniMode = "SSB_U";
+                    break;
+                case "CWL":
+                    omniMode = "CW_L";
+                    break;
+                case "CWU":
+                    omniMode = "CW_U";
+                    break;
+                case "SAM":
+                    omniMode = "SSB_U";
+                    break;
+                case "SPEC":
+                    omniMode = "SSB_U";
+                    break;
+                case "DIGL":
+                    omniMode = "DIG_L";
+                    break;
+                case "DIGU":
+                    omniMode = "DIG_U";
+                    break;
+
+            }
+            Console.WriteLine("mode: {0} omnimode: {1}", mode,omniMode);
+            if (mode != "undefine")
+                RigX[rigId].Mode = (RigParamX)OmniMapping.StringToParam(omniMode);
+        }
+
+        internal void setFreq(int v, int freq)
+        {
+            Console.WriteLine("setting rig: {0} to {1}", v, freq);
+            RigX[v].Freq = freq;
+            RigX[v].FreqA = freq;
+        }
+
         public void SetRigState(int rigNum, RigState state)
         {
 

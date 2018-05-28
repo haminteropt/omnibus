@@ -7,6 +7,16 @@ using System.Web.Http;
 
 namespace OmniRigBus.Controller
 {
+    public class Freq
+    {
+        public int rigId { get; set; }
+        public int freq { get; set; }
+    }
+    public class Mode
+    {
+        public int rigId { get; set; }
+        public string mode { get; set; }
+    }
     //[RoutePrefix("v1/OmniRig/Rigs")]
     public class OmniRigController : ApiController
     {
@@ -25,13 +35,9 @@ namespace OmniRigBus.Controller
             oRig.GetRigState(1);
             return rigs;
         }
-        //public IEnumerable<string> Get()
-        //{
-        //    return new string[] { "Hello", "World" };
-        //}
 
         // GET api/rig/5 
-        [Route("api/OmniRig/V1/{id:int}")]
+        [Route("api/OmniRig/V1/RigsInfo/{id:int}")]
         public RigState Get(int id)
         {
 
@@ -43,12 +49,25 @@ namespace OmniRigBus.Controller
             return rigs.RigList[id];
         }
 
-        // POST api/demo 
-        public void Post([FromBody]string value)
+
+        [Route("api/OmniRig/V1/freq")]
+        public void PutFreq([FromBody]Freq value)
         {
+            if (value.rigId != 1 && value.rigId != 2)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            Console.WriteLine("rig {0} freq value: {1}",value.rigId, value.freq);
+            oRig.setFreq(value.rigId - 1, value.freq);
         }
 
-        // PUT api/OmniRig/5 
+        [Route("api/OmniRig/V1/mode")]
+        public void PutMode([FromBody]Mode value)
+        {
+            if (value.rigId != 1 && value.rigId != 2)
+                throw new HttpResponseException(HttpStatusCode.NotFound);
+            Console.WriteLine("rig {0} freq value: {1}", value.rigId, value.mode);
+            oRig.setMode(value.rigId - 1, value.mode);
+        }
+        [Route("api/OmniRig/V1/setRig/{id:int}")]
         public void Put(int id, [FromBody]RigState value)
         {
             oRig.SetRigState(id - 1, value);
