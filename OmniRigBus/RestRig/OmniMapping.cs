@@ -65,10 +65,10 @@ namespace OmniRigBus.RestRig
             ParamToStr.Add(RigParamX.PM_TX, "TX");
             ParamToStr.Add(RigParamX.PM_CW_L, "CW_L");
             ParamToStr.Add(RigParamX.PM_CW_U, "CW_U");
-            ParamToStr.Add(RigParamX.PM_SSB_L, "SSB_L");
-            ParamToStr.Add(RigParamX.PM_SSB_U, "SSB_U");
-            ParamToStr.Add(RigParamX.PM_DIG_L, "DIG_L");
-            ParamToStr.Add(RigParamX.PM_DIG_U, "DIG_U");
+            ParamToStr.Add(RigParamX.PM_SSB_L, "LSB");
+            ParamToStr.Add(RigParamX.PM_SSB_U, "USB");
+            ParamToStr.Add(RigParamX.PM_DIG_L, "DIGL");
+            ParamToStr.Add(RigParamX.PM_DIG_U, "DIGU");
             ParamToStr.Add(RigParamX.PM_AM, "AM");
             ParamToStr.Add(RigParamX.PM_FM, "FM");
         }

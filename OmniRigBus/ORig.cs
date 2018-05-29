@@ -7,6 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+//{
+//    "Freq": 14313000,
+//    "FreqA": 14313000,
+//    "FreqB": 7000000,
+//    "Mode": "USB",
+//    "Pitch": 0,
+//    "RigType": "PowerSDR",
+//    "Rit": "RitOff",
+//    "RitOffset": 0,
+//    "Status": null,
+//    "StatusStr": null,
+//    "Split": "SplitOff",
+//    "Tx": "RX",
+//    "Vfo": "VFOAA",
+//    "Xit": "XitOff"
+//}
 
 namespace OmniRigBus
 {
@@ -75,7 +91,16 @@ namespace OmniRigBus
         {
             string omniMode = "undefine";
             mode = mode.ToUpper();
-            switch(mode)
+            omniMode = ModeToOmniMode(mode);
+            Console.WriteLine("mode: {0} omnimode: {1}", mode, omniMode);
+            if (mode != "undefine")
+                RigX[rigId].Mode = (RigParamX)OmniMapping.StringToParam(omniMode);
+        }
+
+        private static string ModeToOmniMode(string mode)
+        {
+            string omniMode = "undefined"; ;
+            switch (mode)
             {
                 case "USB":
                     omniMode = "SSB_U";
@@ -110,13 +135,43 @@ namespace OmniRigBus
                 case "DIGU":
                     omniMode = "DIG_U";
                     break;
-
             }
-            Console.WriteLine("mode: {0} omnimode: {1}", mode,omniMode);
-            if (mode != "undefine")
-                RigX[rigId].Mode = (RigParamX)OmniMapping.StringToParam(omniMode);
-        }
 
+            return omniMode;
+        }
+        private static string OmniModeToMode(string omniMode)
+        {
+            string mode = "undefined";
+            switch (omniMode)
+            {
+                case "SSB_U":
+                    mode = "USB";
+                    break;
+                case "SSB_L":
+                    mode = "LSB";
+                    break;
+                case "AM":
+                    mode = "AM";
+                    break;
+                case "FM":
+                    mode = "FM";
+                    break;
+                case "CW_L":
+                    mode = "CWL";
+                    break;
+                case "CW_U":
+                    mode = "CWU";
+                    break;
+                case "DIG_L":
+                    mode = "DIGL";
+                    break;
+                case "DIG_U":
+                    mode = "DIGU";
+                    break;
+            }
+
+            return omniMode;
+        }
         internal void setFreq(int v, int freq)
         {
             Console.WriteLine("setting rig: {0} to {1}", v, freq);
@@ -134,7 +189,7 @@ namespace OmniRigBus
             RigX[rigNum].FreqB = (int)state.FreqB;
 
             if (state.Mode != null)
-                RigX[rigNum].Mode = (RigParamX)OmniMapping.StringToParam(state.Mode);
+                RigX[rigNum].Mode = (RigParamX)OmniMapping.StringToParam(ModeToOmniMode(state.Mode));
 
 
             RigX[rigNum].Pitch = state.Pitch;
