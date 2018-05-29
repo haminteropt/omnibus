@@ -4,8 +4,11 @@ using OmniRigBus.RestRig;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Http;
 
 //{
 //    "Freq": 14313000,
@@ -189,7 +192,15 @@ namespace OmniRigBus
             RigX[rigNum].FreqB = (int)state.FreqB;
 
             if (state.Mode != null)
+            {
+                string mode = ModeToOmniMode(state.Mode);
+                if (mode == "undefined")
+                {
+                    throw new HttpResponseException(HttpStatusCode.BadRequest);
+                }
                 RigX[rigNum].Mode = (RigParamX)OmniMapping.StringToParam(ModeToOmniMode(state.Mode));
+                
+            }
 
 
             RigX[rigNum].Pitch = state.Pitch;

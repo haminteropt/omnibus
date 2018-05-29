@@ -17,7 +17,7 @@ namespace OmniRigBus.Controller
         public int rigId { get; set; }
         public string mode { get; set; }
     }
-    //[RoutePrefix("v1/OmniRig/Rigs")]
+    //[RoutePrefix("v1/RigBus/Rigs")]
     public class OmniRigController : ApiController
     {
         private Rigs rigs = Rigs.Instance;
@@ -28,7 +28,7 @@ namespace OmniRigBus.Controller
 
         }
         // GET api/rig 
-        [Route("api/OmniRig/V1/RigsInfo")]
+        [Route("api/RigBus/V1/RigsInfo")]
         public Rigs Get()
         {
             oRig.GetRigState(0);
@@ -37,7 +37,7 @@ namespace OmniRigBus.Controller
         }
 
         // GET api/rig/5 
-        [Route("api/OmniRig/V1/RigsInfo/{id:int}")]
+        [Route("api/RigBus/V1/RigsInfo/{id:int}")]
         public RigState Get(int id)
         {
 
@@ -50,7 +50,7 @@ namespace OmniRigBus.Controller
         }
 
 
-        [Route("api/OmniRig/V1/freq")]
+        [Route("api/RigBus/V1/freq")]
         public void PutFreq([FromBody]Freq value)
         {
             if (value.rigId != 1 && value.rigId != 2)
@@ -59,7 +59,7 @@ namespace OmniRigBus.Controller
             oRig.setFreq(value.rigId - 1, value.freq);
         }
 
-        [Route("api/OmniRig/V1/mode")]
+        [Route("api/RigBus/V1/mode")]
         public void PutMode([FromBody]Mode value)
         {
             if (value.rigId != 1 && value.rigId != 2)
@@ -67,7 +67,7 @@ namespace OmniRigBus.Controller
             Console.WriteLine("rig {0} freq value: {1}", value.rigId, value.mode);
             oRig.setMode(value.rigId - 1, value.mode);
         }
-        [Route("api/OmniRig/V1/setRig/{id:int}")]
+        [Route("api/RigBus/V1/setRig/{id:int}")]
         public void Put(int id, [FromBody]RigState value)
         {
             oRig.SetRigState(id - 1, value);
