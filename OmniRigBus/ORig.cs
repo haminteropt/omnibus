@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using OmniRig;
 using OmniRigBus.RestRig;
+using RigBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +30,7 @@ using System.Web.Http;
 
 namespace OmniRigBus
 {
-    public class ORig
+    public class ORig: IRig
     {
         private static ORig instance = null;
         private OmniRigX OmniRig;
@@ -90,7 +91,7 @@ namespace OmniRigBus
             return rigList[rigNum];
         }
 
-        internal void setMode(int rigId, string mode)
+        public void setMode(int rigId, string mode)
         {
             string omniMode = "undefine";
             mode = mode.ToUpper();
@@ -175,7 +176,7 @@ namespace OmniRigBus
 
             return omniMode;
         }
-        internal void setFreq(int v, int freq)
+        public void setFreq(int v, int freq)
         {
             Console.WriteLine("setting rig: {0} to {1}", v, freq);
             RigX[v].Freq = freq;
@@ -188,8 +189,9 @@ namespace OmniRigBus
             var rigs = Rigs.Instance;
 
             RigX[rigNum].Freq = state.Freq;
-            RigX[rigNum].FreqA = state.FreqA;
-            RigX[rigNum].FreqB = (int)state.FreqB;
+            setFreq(rigNum, state.Freq);
+            setFreqA(rigNum, state.FreqA);
+            setFreqB(rigNum, state.FreqB);
 
             if (state.Mode != null)
             {
@@ -202,14 +204,11 @@ namespace OmniRigBus
                 
             }
 
+            setPitch(rigNum, state.Pitch);
 
-            RigX[rigNum].Pitch = state.Pitch;
-
-            if (state.Rit != null)
-                RigX[rigNum].Rit = (RigParamX)OmniMapping.StringToParam(state.Rit);
-
-            RigX[rigNum].RitOffset = state.RitOffset;
-
+            setRit(rigNum, state.Rit);
+            setRitOffset(rigNum, state.RitOffset);
+            // todo
             if (state.Split != null)
                 RigX[rigNum].Split = (RigParamX)OmniMapping.StringToParam(state.Split);
 
@@ -218,6 +217,49 @@ namespace OmniRigBus
 
             if (state.Xit != null)
                 RigX[rigNum].Xit = (RigParamX)OmniMapping.StringToParam(state.Xit);
+        }
+
+        public void setRigState(int rigId, RigState state)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void setFreqA(int rigId, int freq)
+        {
+            RigX[rigId].FreqA = freq;
+        }
+
+        public void setFreqB(int rigId, int freq)
+        {
+            RigX[rigId].FreqB = freq;
+        }
+
+        public void setPitch(int rigId, int pitch)
+        {
+            RigX[rigId].Pitch = pitch;
+        }
+
+        public void setRit(int rigId, string rit)
+        {
+            if (string.IsNullOrWhiteSpace(rit)) return;
+
+            RigX[rigId].Rit = (RigParamX)OmniMapping.StringToParam(rit);
+        }
+
+        public void setRitOffset(int rigId, int ritOffset)
+        {
+            RigX[rigId].RitOffset = ritOffset;
+        }
+        // todo
+        public void setVfo(int rigId, string split)
+        {
+            if (split != null)
+                RigX[rigId].Split = (RigParamX)OmniMapping.StringToParam(split);
+        }
+
+        public void set(int rigId, string xit)
+        {
+            throw new NotImplementedException();
         }
 
         public static ORig Instance

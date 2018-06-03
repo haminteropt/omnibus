@@ -1,11 +1,8 @@
-﻿using OmniRig;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace OmniRigBus
+namespace RigBus
 {
     public class RigState
     {
