@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using OmniRig;
+using OmniRigBus;
+using OmniRigBus.OmniRigCOM;
 using OmniRigBus.RestRig;
 using RigBus;
 using System;
@@ -98,7 +100,7 @@ namespace OmniRigBus
             omniMode = ModeToOmniMode(mode);
             Console.WriteLine("mode: {0} omnimode: {1}", mode, omniMode);
             if (mode != "undefine")
-                RigX[rigId].Mode = (RigParamX)OmniMapping.StringToParam(omniMode);
+                RigX[rigId].Mode = (OmniRig.RigParamX)OmniMapping.StringToParam(omniMode);
         }
 
         private static string ModeToOmniMode(string mode)
@@ -200,7 +202,7 @@ namespace OmniRigBus
                 {
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
                 }
-                RigX[rigNum].Mode = (RigParamX)OmniMapping.StringToParam(ModeToOmniMode(state.Mode));
+                RigX[rigNum].Mode = (OmniRig.RigParamX)OmniMapping.StringToParam(ModeToOmniMode(state.Mode));
                 
             }
 
@@ -210,13 +212,13 @@ namespace OmniRigBus
             setRitOffset(rigNum, state.RitOffset);
             // todo
             if (state.Split != null)
-                RigX[rigNum].Split = (RigParamX)OmniMapping.StringToParam(state.Split);
+                RigX[rigNum].Split = (OmniRig.RigParamX)OmniMapping.StringToParam(state.Split);
 
             if (state.Vfo != null)
-                RigX[rigNum].Vfo = (RigParamX)OmniMapping.StringToParam(state.Vfo);
+                RigX[rigNum].Vfo = (OmniRig.RigParamX)OmniMapping.StringToParam(state.Vfo);
 
             if (state.Xit != null)
-                RigX[rigNum].Xit = (RigParamX)OmniMapping.StringToParam(state.Xit);
+                RigX[rigNum].Xit = (OmniRig.RigParamX)OmniMapping.StringToParam(state.Xit);
         }
 
         public void setRigState(int rigId, RigState state)
@@ -243,7 +245,7 @@ namespace OmniRigBus
         {
             if (string.IsNullOrWhiteSpace(rit)) return;
 
-            RigX[rigId].Rit = (RigParamX)OmniMapping.StringToParam(rit);
+            RigX[rigId].Rit = (OmniRig.RigParamX)OmniMapping.StringToParam(rit);
         }
 
         public void setRitOffset(int rigId, int ritOffset)
@@ -254,7 +256,7 @@ namespace OmniRigBus
         public void setVfo(int rigId, string split)
         {
             if (split != null)
-                RigX[rigId].Split = (RigParamX)OmniMapping.StringToParam(split);
+                RigX[rigId].Split = (OmniRig.RigParamX)OmniMapping.StringToParam(split);
         }
 
         public void set(int rigId, string xit)

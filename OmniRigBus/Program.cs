@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Hosting;
+using OmniRigBus.UdpNetwork;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,9 @@ namespace OmniRigBus
     {
         static int Main(string[] args)
         {
-            try {
+            NetworkThreadRunner.StartNetworkThread();
+            try
+            {
                 var exitCode = HostFactory.Run(c =>
                 {
                     c.Service<OmniRigService>(service =>

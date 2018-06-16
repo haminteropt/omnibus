@@ -19,7 +19,7 @@ namespace OmniRigBus
             rig = ORig.Instance;
             // Configure Web API for self-host. 
             var config = new HttpConfiguration();
-            config.EnableSwagger(c => c.SingleApiVersion("v1", "A title for your API")).
+            config.EnableSwagger(c => c.SingleApiVersion("v1", "OmniRigBus Control OmniRig via RigBus")).
             EnableSwaggerUi();
 
             config.MapHttpAttributeRoutes();
