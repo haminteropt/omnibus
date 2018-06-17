@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -13,32 +14,102 @@ namespace OmniRigBus.UdpNetwork
 {
     public class NetworkThreadRunner
     {
-        private const int listenPort = 7300;
+        public int listenUdpPort = -1;
+        public int listenTcpPort = -1;
+        private const int basePort = 7301;
+        private const int topPort = 7600;
+
         private static NetworkThreadRunner netWorkThread = null;
         public Thread serverThread;
         public Thread clientThread;
         public string guid = Guid.NewGuid().ToString();
-        public static NetworkThreadRunner StartNetworkThread()
+        UdpClient udpClient = new UdpClient();
+
+        public static NetworkThreadRunner GetInstance()
         {
             if (netWorkThread == null)
                 netWorkThread = new NetworkThreadRunner();
 
             return netWorkThread;
         }
-        public NetworkThreadRunner()
+        private NetworkThreadRunner()
         {
+            findPorts();
+            udpClient.ExclusiveAddressUse = false;
             ServerInit();
             clientInit();
         }
 
+        private void findPorts()
+        {
+            findFreeUdpPort();
+            findFreeTcpPort();
+            Console.WriteLine("tcp port: {0} udp port: {1}", listenTcpPort, listenUdpPort);
+        }
+
+        private void findFreeUdpPort()
+        {
+            HashSet<int> inUsePorts = new HashSet<int>();
+            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            IPEndPoint[] endPoints = properties.GetActiveTcpListeners();
+
+            foreach (IPEndPoint e in endPoints)
+            {
+                if (e.Port >= basePort)
+                    inUsePorts.Add(e.Port);
+            }
+            if (listenTcpPort > 0 && inUsePorts.Contains(listenTcpPort) == false)
+            {
+                listenUdpPort = listenTcpPort;
+                return;
+            }
+            listenUdpPort = SelectFreePort(inUsePorts);
+
+        }
+        private void findFreeTcpPort()
+        {
+            HashSet<int> inUsePorts = new HashSet<int>();
+            IPGlobalProperties properties = IPGlobalProperties.GetIPGlobalProperties();
+            IPEndPoint[] endPoints = properties.GetActiveUdpListeners();
+
+            foreach (IPEndPoint e in endPoints)
+            {
+                if (e.Port >= basePort)
+                    inUsePorts.Add(e.Port);
+            }
+            if (listenUdpPort > 0 && inUsePorts.Contains(listenUdpPort) == false)
+            {
+                listenTcpPort = listenUdpPort;
+                return;
+            }
+            listenTcpPort = SelectFreePort(inUsePorts);
+        }
+
+        private int SelectFreePort(HashSet<int> inUsePorts)
+        {
+            int port = -1;
+            for (int i = basePort; i <= topPort; i++)
+            {
+                if (inUsePorts.Contains(i) == false)
+                {
+                    port = i;
+                    break;
+                }
+            }
+            return port;
+        }
+
         private void clientInit()
         {
+            clientThread = new Thread(SendBroadcast);
             serverThread.IsBackground = true;
+
             clientThread.Start();
         }
 
         private void ServerInit()
         {
+
             serverThread = new Thread(ServerStart);
             serverThread.IsBackground = true;
             serverThread.Start();
@@ -46,12 +117,13 @@ namespace OmniRigBus.UdpNetwork
         private void ServerStart()
         {
 
-            UdpClient udpClient = new UdpClient(listenPort);
+            UdpClient udpServer = new UdpClient(listenUdpPort);
+
             int count = 0;
             while (true)
             {
                 IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-                Byte[] receiveBytes = udpClient.Receive(ref RemoteIpEndPoint);
+                Byte[] receiveBytes = udpServer.Receive(ref RemoteIpEndPoint);
                 string returnData = Encoding.ASCII.GetString(receiveBytes);
                 Console.WriteLine("{0}:recv data {1} address: {2}", count++, returnData,
                     RemoteIpEndPoint.Address.ToString());
@@ -65,13 +137,18 @@ namespace OmniRigBus.UdpNetwork
             Console.WriteLine("parsed cmd");
         }
 
-        private void SendBroadcast(UdpCmdPacket packet)
+        public void SendBroadcast()
         {
-            UdpClient udpClient = new UdpClient();
-            udpClient.ExclusiveAddressUse = false;
-            udpClient.Connect("255.255.255.255", listenPort);
-            Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(packet));
-            udpClient.Send(senddata, senddata.Length);
+            var rigBusDesc = RigBusInfo.Instance;
+            while (true)
+            {
+                rigBusDesc.Command = DateTime.Now.ToString();
+                udpClient.Connect("255.255.255.255", DirectoryBusGreeting.DirPortUdp);
+                Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(rigBusDesc));
+                udpClient.Send(senddata, senddata.Length);
+                Thread.Sleep(3000);
+            }
         }
+
     }
 }

@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using HamBusLib;
+using Newtonsoft.Json;
 using OmniRig;
 using OmniRigBus;
 using OmniRigBus.OmniRigCOM;
 using OmniRigBus.RestRig;
+using OmniRigBus.UdpNetwork;
 using RigBus;
 using System;
 using System.Collections.Generic;
@@ -32,23 +34,37 @@ using System.Web.Http;
 
 namespace OmniRigBus
 {
-    public class ORig: IRig
+    public class OmniRigInterface : IRig
     {
-        private static ORig instance = null;
+        private static OmniRigInterface instance = null;
+        private NetworkThreadRunner netRunner = NetworkThreadRunner.GetInstance();
         private OmniRigX OmniRig;
         private List<RigX> RigX = new List<RigX>();
 
         private Rigs rigState = Rigs.Instance;
 
-        private ORig()
+        private OmniRigInterface()
         {
 
-                OmniRig = new OmniRigX();
-                OmniRig.ParamsChange += ParamsChangeEvent;
-                RigX.Add(OmniRig.Rig1);
-                RigX.Add(OmniRig.Rig2);
+            OmniRig = new OmniRigX();
+            OmniRig.ParamsChange += ParamsChangeEvent;
+            RigX.Add(OmniRig.Rig1);
+            RigX.Add(OmniRig.Rig2);
+            RigState rigState = GetRigState(1);
+            var rigBusDesc = RigBusInfo.Instance;
+            rigBusDesc.Command = "reg";
+            rigBusDesc.RigType = OmniRig.Rig1.RigType;
+            rigBusDesc.TcpPort = netRunner.listenTcpPort;
+            rigBusDesc.UdpPort = netRunner.listenUdpPort;
+            rigBusDesc.Type = "RigBusDesc";
+            rigBusDesc.Id = Guid.NewGuid().ToString();
+            rigBusDesc.sendSyncInfo = true;
+            rigBusDesc.MaxVersion = 1;
+            rigBusDesc.MinVersion = 1;
+            rigBusDesc.Name = "OmniRigBus";
+            rigBusDesc.CurrentTime = DateTime.Now;
+            netRunner.SendBroadcast();
 
-            
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
         {
@@ -203,7 +219,7 @@ namespace OmniRigBus
                     throw new HttpResponseException(HttpStatusCode.BadRequest);
                 }
                 RigX[rigNum].Mode = (OmniRig.RigParamX)OmniMapping.StringToParam(ModeToOmniMode(state.Mode));
-                
+
             }
 
             setPitch(rigNum, state.Pitch);
@@ -264,13 +280,13 @@ namespace OmniRigBus
             throw new NotImplementedException();
         }
 
-        public static ORig Instance
+        public static OmniRigInterface Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new ORig();
+                    instance = new OmniRigInterface();
                 }
                 return instance;
             }

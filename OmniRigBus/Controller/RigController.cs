@@ -22,7 +22,7 @@ namespace OmniRigBus.Controller
     public class OmniRigController : ApiController
     {
         private Rigs rigs = Rigs.Instance;
-        private ORig oRig = ORig.Instance;
+        private OmniRigInterface oRig = OmniRigInterface.Instance;
 
         public OmniRigController()
         {

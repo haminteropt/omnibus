@@ -141,6 +141,7 @@
     <Compile Include="RestRig\OmniMapping.cs" />
     <Compile Include="RestRig\RigInfo.cs" />
     <Compile Include="RestRig\Rigs.cs" />
+    <Compile Include="RigBusDesc.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="UdpNetwork\NetworkRunner.cs" />
   </ItemGroup>
