@@ -21,7 +21,7 @@ namespace OmniRigBus.UdpNetwork
 
         private static NetworkThreadRunner netWorkThread = null;
         public Thread serverThread;
-        public Thread clientThread;
+        public Thread clientThread = null;
         public string guid = Guid.NewGuid().ToString();
         UdpClient udpClient = new UdpClient();
 
@@ -101,8 +101,10 @@ namespace OmniRigBus.UdpNetwork
 
         private void clientInit()
         {
+            if (clientThread != null)
+                return;
             clientThread = new Thread(SendBroadcast);
-            serverThread.IsBackground = true;
+            serverThread.IsBackground = false;
 
             clientThread.Start();
         }
@@ -142,9 +144,10 @@ namespace OmniRigBus.UdpNetwork
             var rigBusDesc = RigBusInfo.Instance;
             while (true)
             {
-                rigBusDesc.Command = DateTime.Now.ToString();
+                rigBusDesc.CurrentTime = DateTime.Now;
                 udpClient.Connect("255.255.255.255", DirectoryBusGreeting.DirPortUdp);
                 Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(rigBusDesc));
+                Console.WriteLine("sending data: {0}", rigBusDesc.CurrentTime);
                 udpClient.Send(senddata, senddata.Length);
                 Thread.Sleep(3000);
             }

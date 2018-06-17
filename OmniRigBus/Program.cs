@@ -14,7 +14,7 @@ namespace OmniRigBus
     {
         static int Main(string[] args)
         {
-            NetworkThreadRunner.GetInstance();
+            //NetworkThreadRunner.GetInstance();
             try
             {
                 var exitCode = HostFactory.Run(c =>

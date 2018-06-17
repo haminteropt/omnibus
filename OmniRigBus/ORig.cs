@@ -63,7 +63,7 @@ namespace OmniRigBus
             rigBusDesc.MinVersion = 1;
             rigBusDesc.Name = "OmniRigBus";
             rigBusDesc.CurrentTime = DateTime.Now;
-            netRunner.SendBroadcast();
+            //netRunner.SendBroadcast();
 
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
