@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
@@ -27,6 +28,12 @@ namespace OmniRigBus
 
         public void StartInfoThread()
         {
+
+            string hostName = Dns.GetHostName(); // Retrive the Name of HOST  
+            Console.WriteLine(hostName);
+            // Get the IP  
+            string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
+
             var netThread = NetworkThread.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
             rigBusDesc.Command = "update";
@@ -35,6 +42,8 @@ namespace OmniRigBus
             rigBusDesc.TcpPort = netThread.rigBusDesc.TcpPort;
             rigBusDesc.MinVersion = 1;
             rigBusDesc.MaxVersion = 1;
+            rigBusDesc.host = hostName;
+            rigBusDesc.ip = myIP;
             rigBusDesc.sendSyncInfo = true;
             rigBusDesc.RigType = "Unknown";
             rigBusDesc.Name = "OmniRig";
