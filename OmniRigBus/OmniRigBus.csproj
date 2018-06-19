@@ -61,7 +61,8 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HamBusLib">
+    <Reference Include="HamBusLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\hambuslib\HamBusLib\bin\Debug\netstandard2.0\HamBusLib.dll</HintPath>
     </Reference>
     <Reference Include="Interop.OmniRig">
@@ -130,6 +131,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\RigController.cs" />
+    <Compile Include="NetworkThread.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
     <Compile Include="OmniRigCOM\RigParamX.cs" />
     <Compile Include="OmniRigCOM\RigStatusX.cs" />

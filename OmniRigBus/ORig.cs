@@ -51,18 +51,18 @@ namespace OmniRigBus
             RigX.Add(OmniRig.Rig1);
             RigX.Add(OmniRig.Rig2);
             RigState rigState = GetRigState(1);
-            var rigBusDesc = RigBusInfo.Instance;
-            rigBusDesc.Command = "reg";
-            rigBusDesc.RigType = OmniRig.Rig1.RigType;
-            rigBusDesc.TcpPort = netRunner.listenTcpPort;
-            rigBusDesc.UdpPort = netRunner.listenUdpPort;
-            rigBusDesc.Type = "RigBusDesc";
-            rigBusDesc.Id = Guid.NewGuid().ToString();
-            rigBusDesc.sendSyncInfo = true;
-            rigBusDesc.MaxVersion = 1;
-            rigBusDesc.MinVersion = 1;
-            rigBusDesc.Name = "OmniRigBus";
-            rigBusDesc.CurrentTime = DateTime.Now;
+            var rigBusInfo = OmniRigInfo.Instance;
+            rigBusInfo.Command = "reg";
+            rigBusInfo.RigType = OmniRig.Rig1.RigType;
+            rigBusInfo.TcpPort = netRunner.listenTcpPort;
+            rigBusInfo.UdpPort = netRunner.listenUdpPort;
+            rigBusInfo.Type = "RigBusDesc";
+            rigBusInfo.Id = Guid.NewGuid().ToString();
+            rigBusInfo.sendSyncInfo = true;
+            rigBusInfo.MaxVersion = 1;
+            rigBusInfo.MinVersion = 1;
+            rigBusInfo.Name = "OmniRigBus";
+            rigBusInfo.CurrentTime = DateTime.Now;
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
         {

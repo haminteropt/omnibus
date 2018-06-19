@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 namespace OmniRigBus
 {
 
-    public class RigBusInfo : RigBusDesc
+    public class OmniRigInfo : RigBusInfo
     {
-        private static RigBusInfo instance = null;
-        public static RigBusInfo Instance
+        private static OmniRigInfo instance = null;
+        public static OmniRigInfo Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new RigBusInfo();
+                    instance = new OmniRigInfo();
                 }
                 return instance;
             }
