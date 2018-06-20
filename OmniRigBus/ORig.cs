@@ -68,8 +68,27 @@ namespace OmniRigBus
         {
             if (RigNumber != 1 && RigNumber != 2) return;
             Console.WriteLine(String.Format("Param: {0}", Params));
-            RigState rigState = GetRigState(RigNumber);
-            var json = JsonConvert.SerializeObject(rigState);
+            RigState rigState = GetRigState(RigNumber - 1);
+
+            //var oRig = OmniRigInterface.Instance;
+            sendRigBusState(rigState);
+        }
+
+        private void sendRigBusState(RigState rigState)
+        {
+            var netRunniner = NetworkThreadRunner.GetInstance();
+            var net = NetworkThread.GetInstance();
+
+            var state = new RigOperatingState();
+            var rigBusDesc = OmniRigInfo.Instance;
+            state.Id = rigBusDesc.Id;
+            state.Type = "RigOperatingState";
+            state.Command = "StateUpdate";
+            state.Freq = rigState.Freq;
+            state.Mode = rigState.Mode;
+            Console.WriteLine("Freq: {0} - Mode: {1}", state.Freq,
+                state.Mode);
+            netRunner.SendBroadcast(state, 7300);
         }
 
         public RigState GetRigState(int rigNum)
