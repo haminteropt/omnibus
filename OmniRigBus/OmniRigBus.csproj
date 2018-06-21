@@ -132,6 +132,7 @@
   <ItemGroup>
     <Compile Include="Controller\RigController.cs" />
     <Compile Include="NetworkThread.cs" />
+    <Compile Include="OmniRigBusConf.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
     <Compile Include="OmniRigCOM\RigParamX.cs" />
     <Compile Include="OmniRigCOM\RigStatusX.cs" />

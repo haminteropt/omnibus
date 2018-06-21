@@ -14,6 +14,7 @@ namespace OmniRigBus
     {
         static int Main(string[] args)
         {
+
             NetworkThreadRunner.GetInstance();
             var netThread = NetworkThread.GetInstance();
             netThread.StartInfoThread();
