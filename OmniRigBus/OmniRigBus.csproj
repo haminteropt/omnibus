@@ -62,10 +62,6 @@
     <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HamBusLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\hambuslib\HamBusLib\bin\Debug\netstandard2.0\HamBusLib.dll</HintPath>
-    </Reference>
     <Reference Include="Interop.OmniRig">
       <HintPath>externdlls\Interop.OmniRig.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -167,6 +163,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\hambuslib\HamBusLib\HamBusLib.csproj">
+      <Project>{36578b4b-5e4b-4d99-b58a-1ba6dba2f08a}</Project>
+      <Name>HamBusLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\RigBus\RigBus.csproj">
       <Project>{eff2b19e-1525-44f3-9664-2adff8fbdc67}</Project>
       <Name>RigBus</Name>

@@ -5,7 +5,9 @@ VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OmniRigBus", "OmniRigBus.csproj", "{73087173-1D85-4FEE-A120-230988ED2149}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RigBus", "..\RigBus\RigBus.csproj", "{EFF2B19E-1525-44F3-9664-2ADFF8FBDC67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RigBus", "..\RigBus\RigBus.csproj", "{EFF2B19E-1525-44F3-9664-2ADFF8FBDC67}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HamBusLib", "..\..\hambuslib\HamBusLib\HamBusLib.csproj", "{36578B4B-5E4B-4D99-B58A-1BA6DBA2F08A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{EFF2B19E-1525-44F3-9664-2ADFF8FBDC67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EFF2B19E-1525-44F3-9664-2ADFF8FBDC67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EFF2B19E-1525-44F3-9664-2ADFF8FBDC67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36578B4B-5E4B-4D99-B58A-1BA6DBA2F08A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36578B4B-5E4B-4D99-B58A-1BA6DBA2F08A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36578B4B-5E4B-4D99-B58A-1BA6DBA2F08A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36578B4B-5E4B-4D99-B58A-1BA6DBA2F08A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Owin.Hosting;
-using OmniRigBus.UdpNetwork;
+using HamBusLib.UdpNetwork;
 using System;
 using System.Collections.Generic;
 using System.Linq;

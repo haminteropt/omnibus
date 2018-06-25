@@ -4,7 +4,7 @@ using OmniRig;
 using OmniRigBus;
 using OmniRigBus.OmniRigCOM;
 using OmniRigBus.RestRig;
-using OmniRigBus.UdpNetwork;
+using HamBusLib.UdpNetwork;
 using RigBus;
 using System;
 using System.Collections.Generic;
@@ -15,22 +15,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-//{
-//    "Freq": 14313000,
-//    "FreqA": 14313000,
-//    "FreqB": 7000000,
-//    "Mode": "USB",
-//    "Pitch": 0,
-//    "RigType": "PowerSDR",
-//    "Rit": "RitOff",
-//    "RitOffset": 0,
-//    "Status": null,
-//    "StatusStr": null,
-//    "Split": "SplitOff",
-//    "Tx": "RX",
-//    "Vfo": "VFOAA",
-//    "Xit": "XitOff"
-//}
+
 
 namespace OmniRigBus
 {
