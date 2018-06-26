@@ -43,7 +43,7 @@ namespace OmniRigBus
             rigBusInfo.UdpPort = netRunner.listenUdpPort;
             rigBusInfo.Type = "RigBusDesc";
             rigBusInfo.Id = Guid.NewGuid().ToString();
-            rigBusInfo.sendSyncInfo = true;
+            rigBusInfo.SendSyncInfo = true;
             rigBusInfo.MaxVersion = 1;
             rigBusInfo.MinVersion = 1;
             rigBusInfo.Name = "OmniRigBus";
