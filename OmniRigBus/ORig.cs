@@ -37,7 +37,7 @@ namespace OmniRigBus
             RigX.Add(OmniRig.Rig2);
             RigState rigState = GetRigState(1);
             var rigBusInfo = OmniRigInfo.Instance;
-            rigBusInfo.Command = "reg";
+            rigBusInfo.Command = "update";
             rigBusInfo.RigType = OmniRig.Rig1.RigType;
             rigBusInfo.TcpPort = netRunner.listenTcpPort;
             rigBusInfo.UdpPort = netRunner.listenUdpPort;
@@ -46,6 +46,7 @@ namespace OmniRigBus
             rigBusInfo.SendSyncInfo = true;
             rigBusInfo.MaxVersion = 1;
             rigBusInfo.MinVersion = 1;
+            rigBusInfo.SendSyncInfo = true;
             rigBusInfo.Name = "OmniRigBus";
             rigBusInfo.CurrentTime = DateTime.Now;
         }

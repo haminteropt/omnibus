@@ -1,4 +1,5 @@
 ﻿using HamBusLib;
+using HamBusLib.UdpNetwork;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -34,12 +35,12 @@ namespace OmniRigBus
             // Get the IP  
             string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
 
-            var netThread = NetworkThread.GetInstance();
+            var netThread = NetworkThreadRunner.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
             rigBusDesc.Command = "update";
             rigBusDesc.Id = Guid.NewGuid().ToString();
-            rigBusDesc.UdpPort = netThread.rigBusDesc.UdpPort;
-            rigBusDesc.TcpPort = netThread.rigBusDesc.TcpPort;
+            rigBusDesc.UdpPort = netThread.listenUdpPort;
+            rigBusDesc.TcpPort = netThread.listenTcpPort;
             rigBusDesc.MinVersion = 1;
             rigBusDesc.MaxVersion = 1;
             rigBusDesc.host = hostName;
@@ -50,6 +51,7 @@ namespace OmniRigBus
             infoThread = new Thread(SendRigBusInfo);
             infoThread.Start();
         }
+
         public void SendRigBusInfo()
         {
             while (true)
