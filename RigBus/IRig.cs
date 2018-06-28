@@ -6,15 +6,15 @@ namespace RigBus
 {
     public interface IRig
     {
-        void setRigState(int rigId, RigState state);
-        void setMode(int rigId, string mode);
-        void setFreq(int rigId, int freq);
-        void setFreqA(int rigId, int freq);
-        void setFreqB(int rigId, int freq);
-        void setPitch(int rigId, int pitch);
-        void setRit(int rigId, string rit);
-        void setRitOffset(int rigId, int freq);
-        void setVfo(int rigId, string freq);
-        void set(int rigId, string xit);
+        void SetRigState(int rigId, RigState state);
+        void SetMode(int rigId, string mode);
+        void SetFreq(int rigId, int freq);
+        void SetFreqA(int rigId, int freq);
+        void SetFreqB(int rigId, int freq);
+        void SetPitch(int rigId, int pitch);
+        void SetRit(int rigId, string rit);
+        void SetRitOffset(int rigId, int freq);
+        void SetVfo(int rigId, string freq);
+        void SetXit(int rigId, string xit);
     }
 }

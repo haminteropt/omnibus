@@ -57,7 +57,7 @@ namespace OmniRigBus.Controller
             if (value.rigId != 1 && value.rigId != 2)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             Console.WriteLine("rig {0} freq value: {1}",value.rigId, value.freq);
-            oRig.setFreq(value.rigId - 1, value.freq);
+            oRig.SetFreq(value.rigId - 1, value.freq);
         }
 
         [Route("api/RigBus/V1/mode")]
@@ -66,7 +66,7 @@ namespace OmniRigBus.Controller
             if (value.rigId != 1 && value.rigId != 2)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             Console.WriteLine("rig {0} freq value: {1}", value.rigId, value.mode);
-            oRig.setMode(value.rigId - 1, value.mode);
+            oRig.SetMode(value.rigId - 1, value.mode);
         }
         [Route("api/RigBus/V1/setRig/{id:int}")]
         public void Put(int id, [FromBody]RigState value)
