@@ -55,7 +55,7 @@ namespace OmniRigBus
             if (RigNumber != 1 && RigNumber != 2) return;
             Console.WriteLine(String.Format("Param: {0}", Params));
             RigState rigState = GetRigState(RigNumber - 1);
-
+            Console.WriteLine("param event");
             //var oRig = OmniRigInterface.Instance;
             sendRigBusState(rigState);
         }
@@ -65,7 +65,7 @@ namespace OmniRigBus
             var netRunniner = NetworkThreadRunner.GetInstance();
             var net = NetworkThread.GetInstance();
 
-            var state = new RigOperatingState();
+            var state = RigOperatingState.Instance;
             var rigBusDesc = OmniRigInfo.Instance;
             state.Id = rigBusDesc.Id;
             state.Type = "RigOperatingState";

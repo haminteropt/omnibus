@@ -43,8 +43,8 @@ namespace OmniRigBus
             rigBusDesc.TcpPort = netThread.listenTcpPort;
             rigBusDesc.MinVersion = 1;
             rigBusDesc.MaxVersion = 1;
-            rigBusDesc.host = hostName;
-            rigBusDesc.ip = myIP;
+            rigBusDesc.Host = hostName;
+            rigBusDesc.Ip = myIP;
             rigBusDesc.SendSyncInfo = true;
             rigBusDesc.RigType = "Unknown";
             rigBusDesc.Name = "OmniRig";
