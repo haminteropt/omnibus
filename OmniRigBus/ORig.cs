@@ -36,6 +36,7 @@ namespace OmniRigBus
             RigX.Add(OmniRig.Rig1);
             RigX.Add(OmniRig.Rig2);
             RigState rigState = GetRigState(1);
+            sendRigBusState(rigState);
             var rigBusInfo = OmniRigInfo.Instance;
             rigBusInfo.Command = "update";
             rigBusInfo.RigType = OmniRig.Rig1.RigType;
@@ -48,7 +49,8 @@ namespace OmniRigBus
             rigBusInfo.MinVersion = 1;
             rigBusInfo.SendSyncInfo = true;
             rigBusInfo.Name = "OmniRigBus";
-            rigBusInfo.CurrentTime = DateTime.Now;
+            rigBusInfo.Time = DateTimeUtils.ConvertToUnixTime(DateTime.Now);
+
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
         {
