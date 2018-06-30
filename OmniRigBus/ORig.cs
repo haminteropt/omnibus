@@ -56,7 +56,6 @@ namespace OmniRigBus
             Console.WriteLine(String.Format("Param: {0}", Params));
             RigState rigState = GetRigState(RigNumber - 1);
             Console.WriteLine("param event");
-            //var oRig = OmniRigInterface.Instance;
             sendRigBusState(rigState);
         }
 
@@ -71,6 +70,7 @@ namespace OmniRigBus
             state.Type = "RigOperatingState";
             state.Command = "StateUpdate";
             state.Freq = rigState.Freq;
+            state.FreqA = rigState.Freq;
             state.Mode = rigState.Mode;
             Console.WriteLine("Freq: {0} - Mode: {1}", state.Freq,
                 state.Mode);

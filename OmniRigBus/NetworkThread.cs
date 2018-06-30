@@ -31,10 +31,9 @@ namespace OmniRigBus
         {
 
             string hostName = Dns.GetHostName(); // Retrive the Name of HOST  
-            Console.WriteLine(hostName);
             // Get the IP  
             string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
-
+            Console.WriteLine("my ip: {0}", myIP);
             var netThread = NetworkThreadRunner.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
             rigBusDesc.Command = "update";
@@ -59,7 +58,6 @@ namespace OmniRigBus
                 rigBusDesc.CurrentTime = DateTime.Now;
                 udpClient.Connect("255.255.255.255", Constants.DirPortUdp);
                 Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(rigBusDesc));
-                Console.WriteLine("sending data: {0}", rigBusDesc.CurrentTime);
                 udpClient.Send(senddata, senddata.Length);
                 Thread.Sleep(3000);
             }
