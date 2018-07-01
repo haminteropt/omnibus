@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HamBusLib;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -20,5 +21,17 @@ namespace OmniRigBus
         public string Tx { get; set; }
         public string Vfo { get; set; }
         public string Xit { get; set; }
+
+        public void FromOperatingState(OperatingState optState)
+        {
+            Freq = Convert.ToInt32(optState.Freq);
+            FreqA = Convert.ToInt32(optState.FreqA);
+            FreqB = Convert.ToInt32(optState.FreqB);
+            Mode = optState.Mode;
+            Vfo = optState.Vfo;
+            Xit = optState.Xit;
+            Split = optState.Split;
+            Rit = optState.Rit;
+        }
     }
 }

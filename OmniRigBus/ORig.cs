@@ -26,6 +26,7 @@ namespace OmniRigBus
         private List<RigX> RigX = new List<RigX>();
 
         private Rigs rigState = Rigs.Instance;
+        private RigOperatingState optState = RigOperatingState.Instance;
 
         private OmniRigInterface()
         {
@@ -49,6 +50,7 @@ namespace OmniRigBus
             rigBusInfo.SendSyncInfo = true;
             rigBusInfo.Name = "OmniRigBus";
             rigBusInfo.Time = DateTimeUtils.ConvertToUnixTime(DateTime.Now);
+            optState.newStateDelegate = SetRigOptState;
 
         }
         private void ParamsChangeEvent(int RigNumber, int Params)
@@ -205,6 +207,12 @@ namespace OmniRigBus
             RigX[v].FreqA = freq;
         }
 
+        public void SetRigOptState(OperatingState state)
+        {
+            var newState = new RigState();
+            newState.FromOperatingState(state);
+            SetRigState(0, newState);
+        }
         public void SetRigState(int rigNum, RigState state)
         {
 
