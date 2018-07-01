@@ -22,7 +22,7 @@ namespace OmniRigBus
     public class OmniRigInterface : IRig
     {
         private static OmniRigInterface instance = null;
-        private NetworkThreadRunner netRunner = NetworkThreadRunner.GetInstance();
+        private UdpServer netRunner = UdpServer.GetInstance();
         private OmniRigX OmniRig;
         private List<RigX> RigX = new List<RigX>();
 
@@ -63,8 +63,8 @@ namespace OmniRigBus
 
         private void sendRigBusState(RigState rigState)
         {
-            var netRunniner = NetworkThreadRunner.GetInstance();
-            var net = NetworkThread.GetInstance();
+            var netRunniner = UdpServer.GetInstance();
+            var net = OmniRigInfoThread.GetInstance();
 
             var state = RigOperatingState.Instance;
             var rigBusDesc = OmniRigInfo.Instance;

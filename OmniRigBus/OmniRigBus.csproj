@@ -95,6 +95,9 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.4\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Reactive, Version=4.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>packages\System.Reactive.4.0.0\lib\net46\System.Reactive.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.Cors, Version=5.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.Cors.5.0.0\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
@@ -107,6 +110,8 @@
     <Reference Include="System.Web.Http.SelfHost, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNet.WebApi.SelfHost.5.2.3\lib\net45\System.Web.Http.SelfHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -125,10 +130,12 @@
     <Reference Include="Topshelf.WebApi, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\Topshelf.WebApi.0.4.0.0\lib\net45\Topshelf.WebApi.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\RigController.cs" />
-    <Compile Include="NetworkThread.cs" />
+    <Compile Include="IRig.cs" />
+    <Compile Include="OmniRigInfoThread.cs" />
     <Compile Include="OmniRigBusConf.cs" />
     <Compile Include="OmniRigCOM\OmniRigConst.cs" />
     <Compile Include="OmniRigCOM\RigParamX.cs" />
@@ -142,6 +149,7 @@
     <Compile Include="RestRig\RigInfo.cs" />
     <Compile Include="RestRig\Rigs.cs" />
     <Compile Include="RigBusDesc.cs" />
+    <Compile Include="RigState.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -165,10 +173,6 @@
     <ProjectReference Include="..\..\hambuslib\HamBusLib\HamBusLib.csproj">
       <Project>{36578b4b-5e4b-4d99-b58a-1ba6dba2f08a}</Project>
       <Name>HamBusLib</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\RigBus\RigBus.csproj">
-      <Project>{eff2b19e-1525-44f3-9664-2adff8fbdc67}</Project>
-      <Name>RigBus</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

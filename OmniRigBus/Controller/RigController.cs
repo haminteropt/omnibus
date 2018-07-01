@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OmniRigBus.RestRig;
+using OmniRigBus;
 using RigBus;
 using System;
 using System.Collections.Generic;

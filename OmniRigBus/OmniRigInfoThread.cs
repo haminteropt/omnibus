@@ -12,20 +12,20 @@ using System.Threading.Tasks;
 
 namespace OmniRigBus
 {
-    public class NetworkThread
+    public class OmniRigInfoThread
     {
         private UdpClient udpClient = new UdpClient();
-        private static NetworkThread Instance = null;
+        private static OmniRigInfoThread Instance = null;
         private Thread infoThread;
         private OmniRigInfo rigBusDesc;
-        public static NetworkThread GetInstance()
+        public static OmniRigInfoThread GetInstance()
         {
             if (Instance == null)
-                Instance = new NetworkThread();
+                Instance = new OmniRigInfoThread();
 
             return Instance;
         }
-        private NetworkThread() { }
+        private OmniRigInfoThread() { }
 
         public void StartInfoThread()
         {
@@ -34,7 +34,7 @@ namespace OmniRigBus
             // Get the IP  
             string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
             Console.WriteLine("my ip: {0}", myIP);
-            var netThread = NetworkThreadRunner.GetInstance();
+            var netThread = UdpServer.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
             rigBusDesc.Command = "update";
             rigBusDesc.Id = Guid.NewGuid().ToString();

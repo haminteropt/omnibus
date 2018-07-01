@@ -1,4 +1,4 @@
-﻿using RigBus;
+﻿using OmniRigBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;

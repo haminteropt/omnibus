@@ -15,8 +15,8 @@ namespace OmniRigBus
         static int Main(string[] args)
         {
 
-            NetworkThreadRunner.GetInstance();
-            var netThread = NetworkThread.GetInstance();
+            UdpServer.GetInstance();
+            var netThread = OmniRigInfoThread.GetInstance();
             netThread.StartInfoThread();
 
             try
