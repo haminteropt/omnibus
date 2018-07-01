@@ -1,7 +1,6 @@
 ﻿using Newtonsoft.Json;
 using OmniRigBus.RestRig;
 using OmniRigBus;
-using RigBus;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -43,7 +42,7 @@ namespace OmniRigBus.Controller
         public RigState Get(int id)
         {
 
-            
+
             if (id != 1 && id != 2)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
             id--;
@@ -57,7 +56,7 @@ namespace OmniRigBus.Controller
         {
             if (value.rigId != 1 && value.rigId != 2)
                 throw new HttpResponseException(HttpStatusCode.NotFound);
-            Console.WriteLine("rig {0} freq value: {1}",value.rigId, value.freq);
+            Console.WriteLine("rig {0} freq value: {1}", value.rigId, value.freq);
             oRig.SetFreq(value.rigId - 1, value.freq);
         }
 

@@ -5,7 +5,6 @@ using OmniRigBus;
 using OmniRigBus.OmniRigCOM;
 using OmniRigBus.RestRig;
 using HamBusLib.UdpNetwork;
-using RigBus;
 using System;
 using System.Collections.Generic;
 using System.Linq;
