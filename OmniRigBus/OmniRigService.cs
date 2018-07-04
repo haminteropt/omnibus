@@ -12,7 +12,7 @@ namespace OmniRigBus
         private IDisposable app;
         public void Start()
         {
-            app = WebApp.Start("http://localhost:7301/");
+            app = WebApp.Start("http://localhost:7305/");
         }
         public void Stop()
         {
