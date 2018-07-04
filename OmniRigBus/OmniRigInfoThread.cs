@@ -37,7 +37,7 @@ namespace OmniRigBus
             var netThread = UdpServer.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
             rigBusDesc.Command = "update";
-            rigBusDesc.Id = Guid.NewGuid().ToString();
+
             rigBusDesc.UdpPort = netThread.listenUdpPort;
             rigBusDesc.TcpPort = netThread.listenTcpPort;
             rigBusDesc.MinVersion = 1;

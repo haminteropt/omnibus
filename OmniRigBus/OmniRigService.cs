@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Hosting;
+﻿using HamBusLib;
+using Microsoft.Owin.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,9 @@ namespace OmniRigBus
         private IDisposable app;
         public void Start()
         {
-            app = WebApp.Start("http://localhost:7305/");
+            int httpPort = IpPorts.TcpPort;
+            var url = string.Format("http://localhost:{0}/", httpPort);
+            app = WebApp.Start(url);
         }
         public void Stop()
         {
