@@ -42,7 +42,6 @@ namespace OmniRigBus
             rigBusInfo.RigType = OmniRig.Rig1.RigType;
             rigBusInfo.TcpPort = netRunner.listenTcpPort;
             rigBusInfo.UdpPort = netRunner.listenUdpPort;
-            rigBusInfo.Type = "RigBusDesc";
             rigBusInfo.Id = Guid.NewGuid().ToString();
             rigBusInfo.SendSyncInfo = true;
             rigBusInfo.MaxVersion = 1;
@@ -70,7 +69,7 @@ namespace OmniRigBus
             var state = RigOperatingState.Instance;
             var rigBusDesc = OmniRigInfo.Instance;
             state.Id = rigBusDesc.Id;
-            state.Type = "RigOperatingState";
+            state.DocType = "RigOperatingState";
             state.Command = "StateUpdate";
             state.Freq = rigState.Freq;
             state.FreqA = rigState.Freq;
