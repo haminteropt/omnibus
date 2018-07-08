@@ -47,6 +47,7 @@ namespace OmniRigBus
             rigBusDesc.SendSyncInfo = true;
             rigBusDesc.RigType = "Unknown";
             rigBusDesc.Name = "OmniRig RigBus";
+            rigBusDesc.Description = "OmniRig RigBus";
             infoThread = new Thread(SendRigBusInfo);
             infoThread.Start();
         }
