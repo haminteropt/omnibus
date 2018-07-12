@@ -35,7 +35,7 @@ namespace OmniRigBus
             OmniRig.ParamsChange += ParamsChangeEvent;
             RigX.Add(OmniRig.Rig1);
             RigX.Add(OmniRig.Rig2);
-            RigState rigState = GetRigState(1);
+            RigStatePacket rigState = GetRigState(1);
             sendRigBusState(rigState);
             var rigBusInfo = OmniRigInfo.Instance;
             rigBusInfo.Command = "update";
@@ -56,12 +56,12 @@ namespace OmniRigBus
         {
             if (RigNumber != 1 && RigNumber != 2) return;
             Console.WriteLine(String.Format("Param: {0}", Params));
-            RigState rigState = GetRigState(RigNumber - 1);
+            RigStatePacket rigState = GetRigState(RigNumber - 1);
             Console.WriteLine("param event");
             sendRigBusState(rigState);
         }
 
-        private void sendRigBusState(RigState rigState)
+        private void sendRigBusState(RigStatePacket rigState)
         {
             var netRunniner = UdpServer.GetInstance();
             var net = OmniRigInfoThread.GetInstance();
@@ -79,7 +79,7 @@ namespace OmniRigBus
             netRunner.SendBroadcast(state, 7300);
         }
 
-        public RigState GetRigState(int rigNum)
+        public RigStatePacket GetRigState(int rigNum)
         {
 
             var rigs = Rigs.Instance;
@@ -208,11 +208,11 @@ namespace OmniRigBus
 
         public void SetRigOptState(OperatingState state)
         {
-            var newState = new RigState();
+            var newState = new RigStatePacket();
             newState.FromOperatingState(state);
             SetRigState(0, newState);
         }
-        public void SetRigState(int rigNum, RigState state)
+        public void SetRigState(int rigNum, RigStatePacket state)
         {
 
             var rigs = Rigs.Instance;

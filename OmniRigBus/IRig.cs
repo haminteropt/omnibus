@@ -6,7 +6,7 @@ namespace OmniRigBus
 {
     public interface IRig
     {
-        void SetRigState(int rigId, RigState state);
+        void SetRigState(int rigId, RigStatePacket state);
         void SetMode(int rigId, string mode);
         void SetFreq(int rigId, int freq);
         void SetFreqA(int rigId, int freq);

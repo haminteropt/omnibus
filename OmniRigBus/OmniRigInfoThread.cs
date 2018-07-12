@@ -30,9 +30,9 @@ namespace OmniRigBus
         public void StartInfoThread()
         {
 
-            string hostName = Dns.GetHostName(); // Retrive the Name of HOST  
+            string hostName = NetworkUtils.getHostName();
             // Get the IP  
-            string myIP = Dns.GetHostByName(hostName).AddressList[0].ToString();
+            string myIP = NetworkUtils.getIpAddress();
             Console.WriteLine("my ip: {0}", myIP);
             var netThread = UdpServer.GetInstance();
             rigBusDesc = OmniRigInfo.Instance;
@@ -51,15 +51,23 @@ namespace OmniRigBus
             infoThread = new Thread(SendRigBusInfo);
             infoThread.Start();
         }
-
+        //https://stackoverflow.com/questions/22852781/how-to-do-network-discovery-using-udp-broadcast
         public void SendRigBusInfo()
         {
+            var ServerEp = new IPEndPoint(IPAddress.Any, 0);
+            udpClient.EnableBroadcast = true;
             while (true)
             {
-                rigBusDesc.Time = DateTimeUtils.ConvertToUnixTime(DateTime.Now);
-                udpClient.Connect("255.255.255.255", Constants.DirPortUdp);
                 Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(rigBusDesc));
-                udpClient.Send(senddata, senddata.Length);
+                rigBusDesc.Time = DateTimeUtils.ConvertToUnixTime(DateTime.Now);
+                //udpClient.Connect("255.255.255.255", Constants.DirPortUdp);
+
+                udpClient.Send(senddata, senddata.Length, new IPEndPoint(IPAddress.Broadcast, 7300));
+
+                var ServerResponseData = udpClient.Receive(ref ServerEp);
+                var ServerResponse = Encoding.ASCII.GetString(ServerResponseData);
+                Console.WriteLine("Recived {0} from {1} port {2}", ServerResponse, 
+                    ServerEp.Address.ToString(), ServerEp.Port);
                 Thread.Sleep(3000);
             }
         }

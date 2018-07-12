@@ -9,20 +9,20 @@ namespace OmniRigBus.RestRig
 {
     public class Rigs
     {
-        public List<RigState> RigList { get; private set; }
+        public List<RigStatePacket> RigList { get; private set; }
 
         private static Rigs instance = null;
         private Rigs()
         {
-            RigList = new List<RigState>();
+            RigList = new List<RigStatePacket>();
 
         }
 
         public void PopulateRigs()
         {
             if (RigList.Count != 0) return;
-            RigList.Add(new RigState());
-            RigList.Add(new RigState());
+            RigList.Add(new RigStatePacket());
+            RigList.Add(new RigStatePacket());
         }
 
         public static Rigs Instance

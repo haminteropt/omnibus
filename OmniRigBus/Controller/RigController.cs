@@ -39,7 +39,7 @@ namespace OmniRigBus.Controller
 
         // GET api/rig/5 
         [Route("api/RigBus/V1/RigsInfo/{id:int}")]
-        public RigState Get(int id)
+        public RigStatePacket Get(int id)
         {
 
 
@@ -69,7 +69,7 @@ namespace OmniRigBus.Controller
             oRig.SetMode(value.rigId - 1, value.mode);
         }
         [Route("api/RigBus/V1/setRig/{id:int}")]
-        public void Put(int id, [FromBody]RigState value)
+        public void Put(int id, [FromBody]RigStatePacket value)
         {
             oRig.SetRigState(id - 1, value);
         }

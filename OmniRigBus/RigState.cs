@@ -5,7 +5,7 @@ using System.Text;
 
 namespace OmniRigBus
 {
-    public class RigState
+    public class RigStatePacket
     {
         public int Freq { get; set; }
         public int FreqA { get; set; }
