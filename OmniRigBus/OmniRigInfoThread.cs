@@ -1,4 +1,5 @@
 ﻿using HamBusLib;
+using HamBusLib.Models;
 using HamBusLib.UdpNetwork;
 using Newtonsoft.Json;
 using System;
@@ -54,13 +55,13 @@ namespace OmniRigBus
         //https://stackoverflow.com/questions/22852781/how-to-do-network-discovery-using-udp-broadcast
         public void SendRigBusInfo()
         {
+            DirGreetingList dirList = DirGreetingList.Instance; 
             var ServerEp = new IPEndPoint(IPAddress.Any, 0);
             udpClient.EnableBroadcast = true;
             while (true)
             {
                 Byte[] senddata = Encoding.ASCII.GetBytes(JsonConvert.SerializeObject(rigBusDesc));
                 rigBusDesc.Time = DateTimeUtils.ConvertToUnixTime(DateTime.Now);
-                //udpClient.Connect("255.255.255.255", Constants.DirPortUdp);
 
                 udpClient.Send(senddata, senddata.Length, new IPEndPoint(IPAddress.Broadcast, 7300));
                 Console.WriteLine("Sending Data");
@@ -68,6 +69,8 @@ namespace OmniRigBus
                 var ServerResponse = Encoding.ASCII.GetString(ServerResponseData);
                 Console.WriteLine("Recived {0} from {1} port {2}", ServerResponse, 
                     ServerEp.Address.ToString(), ServerEp.Port);
+                var dirService = DirectoryBusGreeting.ParseCommand(ServerResponse);
+                DirGreetingList.Instance.Add(dirService);
                 Thread.Sleep(3000);
             }
         }
