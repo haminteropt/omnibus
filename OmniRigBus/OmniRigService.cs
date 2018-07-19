@@ -14,7 +14,7 @@ namespace OmniRigBus
         public void Start()
         {
             int httpPort = IpPorts.TcpPort;
-            var url = string.Format("http://+:{0}/", httpPort);
+            var url = string.Format("http://*:{0}/", httpPort);
             app = WebApp.Start(url);
         }
         public void Stop()
